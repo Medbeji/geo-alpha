@@ -55,8 +55,6 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
         
         // CURRENT LOCATION !
         
-        
-        
         if  let email = self.emailTField.text where email != "" , let pwd = self.passwordTField.text where pwd != "" {
             firebaseLoginOrSignUp(email,pwd: pwd)
         } else {
@@ -92,6 +90,8 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
             if error != nil {
                 print(error.code)
                 if  error.code == STATUS_ACCOUNT_NONEXITS {
+                    // SignUP
+                    
                     DataService.ds.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: {
                         error,result in
                         if error != nil {
@@ -101,8 +101,7 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
                             // Add the USER to USERS node in Firebase with Name by Default and Current location
                             let user: Dictionary<String,AnyObject> = [ "location" : ["latitude":self.latitude,"longitude":self.longitude],"name":email.substringToIndex((email.rangeOfString("@")?.startIndex)!),"password":pwd]
                             DataService.ds.REF_USERS.childByAppendingPath("\(result[KEY_UID]!)").setValue(user)
-                            
-                            NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
+                            NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID]!, forKey: KEY_UID)
                             DataService.ds.REF_BASE.authUser(email, password: pwd, withCompletionBlock: nil)
                             self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                         }
@@ -110,7 +109,7 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
                     })
                 }
             } else {
-                
+                // Login
                 let location : Dictionary<String,AnyObject>=["latitude":self.latitude,"longitude":self.longitude]
                 print(location)
                 DataService.ds.REF_USERS.childByAppendingPath(authData.uid).childByAppendingPath("location").setValue(location)

@@ -18,7 +18,6 @@ class UserTableVC: UITableViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -35,14 +34,14 @@ class UserTableVC: UITableViewController  {
                         }
                         let key = snap.key
                         let user = Client(key: key, location: userLocation,dictionary: userDict)
-                        if user.userID != DataService.ds.CURRENT_USER.authData.uid {
+                        if user.userID != DataService.ds.CURRENT_USER_ID {
                             self.users.append(user)
                         }
                         if ( self.authenDict[user.userID] == nil) {
                             self.authenDict[user.userID] = false
                         }
                         
-                        //Listening for response !!
+                        //Listening for responses!!
                         self.listeningForDemandsResponse(user.userID)
                         
                     }
@@ -61,23 +60,27 @@ class UserTableVC: UITableViewController  {
         
         DataService.ds.REF_CONNECTIONS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).observeEventType(.Value, withBlock: {
             snapshot in
-            
-            let userDict = snapshot.value as? Dictionary<String,AnyObject>
-            let userIDSource = Array(userDict!.keys)[0] as String
-            // We can  get information about the user from Firebase here ...
-            print(userIDSource)
-            var showAlert = true
-            
-            for user in self.usersConnectedWith {
-                if user == userIDSource {
-                    showAlert = false
+            print("hello this is snapshot key \(snapshot.key)")
+            print("hello this is snapshot key \(snapshot.value is NSNull)")
+            if  !(snapshot.value is NSNull){
+                let userDict = snapshot.value as? Dictionary<String,AnyObject>
+                let userIDSource = Array(userDict!.keys)[0] as String
+                // We can  get information about the user from Firebase here ...
+                print("userIDSource = ", userIDSource)
+                var showAlert = true
+                
+                for user in self.usersConnectedWith {
+                    if user == userIDSource {
+                        showAlert = false
+                    }
                 }
-            }
-            
-            if showAlert {
-                self.usersConnectedWith.append(userIDSource)
-                // Show Alerte!
-                self.ShowAlert(" Show me your location request arrived ! ",msg: "\(userIDSource) want to get your location",usrIDSrc: userIDSource)
+                
+                if showAlert {
+                    self.usersConnectedWith.append(userIDSource)
+                    // Show Alerte!
+                    self.ShowAlert(" Show me your location request arrived ! ",msg: "\(userIDSource) want to get your location",usrIDSrc: userIDSource)
+                }
+                
             }
         })
         
@@ -107,23 +110,30 @@ class UserTableVC: UITableViewController  {
     
     
     func ShowAlert(title : String,msg:String,usrIDSrc: String){
-        
         let alert = UIAlertController(title:title,message:msg,preferredStyle: .Alert)
-        let acceptAction = UIAlertAction(title: "Accept", style: .Default, handler: {
-            (alert:UIAlertAction) in
-            print("Action Accepted!")
+        
+        if  ( usrIDSrc == "" ) {
+            let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(action)
+        } else {
             
-            DataService.ds.REF_CONNECTIONS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath(usrIDSrc).childByAppendingPath("accept").setValue("true")
+            let acceptAction = UIAlertAction(title: "Accept", style: .Default, handler: {
+                (alert:UIAlertAction) in
+                print("Action Accepted!")
+                
+                DataService.ds.REF_CONNECTIONS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath(usrIDSrc).childByAppendingPath("accept").setValue("true")
+                
+            })
+            let denyAction = UIAlertAction(title: "Deny", style: .Default, handler: {
+                (alert:UIAlertAction) in
+                print("Action denied!")
+                
+                DataService.ds.REF_CONNECTIONS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath(usrIDSrc).childByAppendingPath("accept").setValue("false")
+            })
+            alert.addAction(acceptAction)
+            alert.addAction(denyAction)
             
-        })
-        let denyAction = UIAlertAction(title: "Deny", style: .Default, handler: {
-            (alert:UIAlertAction) in
-            print("Action denied!")
-            
-            DataService.ds.REF_CONNECTIONS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath(usrIDSrc).childByAppendingPath("accept").setValue("false")
-        })
-        alert.addAction(acceptAction)
-        alert.addAction(denyAction)
+        }
         presentViewController(alert, animated: true, completion: nil)
         
     }
