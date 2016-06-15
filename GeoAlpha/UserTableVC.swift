@@ -8,9 +8,10 @@
 
 import UIKit
 import Firebase
+import MapKit
 
-class UserTableVC: UITableViewController  {
-    
+class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapViewDelegate  {
+    var locationManager: CLLocationManager!
     var users = [Client]()
     var authenDict = Dictionary<String,Bool>()
     var isAuthorized = false
@@ -20,7 +21,42 @@ class UserTableVC: UITableViewController  {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        self.showUsers()
+        usersConnectedWith = []
+        // Listening for demands !!
+        self.listeningForDemands()
         
+        self.locationSetting()
+        
+    }
+    
+    func locationSetting(){
+        
+        self.locationManager = CLLocationManager()
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0]
+        
+        DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/longitude").setValue(userLocation.coordinate.longitude)
+        DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/latitude").setValue(userLocation.coordinate.latitude)
+        
+        
+    }
+    
+    
+    
+    
+    func showUsers(){
         DataService.ds.REF_USERS.observeEventType(.Value, withBlock: {
             snapshot in
             self.users = []
@@ -49,19 +85,12 @@ class UserTableVC: UITableViewController  {
             }
             self.tableView.reloadData()
         })
-        usersConnectedWith = []
-        // Listening for demands !!
-        self.listeningForDemands()
-        
     }
-    
     
     func listeningForDemands(){
         
         DataService.ds.REF_CONNECTIONS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).observeEventType(.Value, withBlock: {
             snapshot in
-            print("hello this is snapshot key \(snapshot.key)")
-            print("hello this is snapshot key \(snapshot.value is NSNull)")
             if  !(snapshot.value is NSNull){
                 let userDict = snapshot.value as? Dictionary<String,AnyObject>
                 let userIDSource = Array(userDict!.keys)[0] as String
@@ -226,7 +255,7 @@ class UserTableVC: UITableViewController  {
             
             if !isAuthorized {
                 
-                let alertController = UIAlertController(title: "Sorry", message: "You cannot perform this segue because access is not granted yet!", preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "Wait for destination response..", message: "You cannot perform this segue because access is not granted yet!", preferredStyle: .Alert)
                 
                 let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alertController.addAction(defaultAction)
