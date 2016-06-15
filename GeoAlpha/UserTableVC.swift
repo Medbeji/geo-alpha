@@ -46,10 +46,11 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0]
-        
-        DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/longitude").setValue(userLocation.coordinate.longitude)
-        DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/latitude").setValue(userLocation.coordinate.latitude)
-        
+        if (DataService.ds.CURRENT_USER_ID != ""){
+            
+            DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/longitude").setValue(userLocation.coordinate.longitude)
+            DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/latitude").setValue(userLocation.coordinate.latitude)
+        }
         
     }
     
@@ -223,10 +224,10 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
         }
         
         if segue.identifier == SEGUE_LOGGED_OUT{
-            
             navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: false)
             DataService.ds.CURRENT_USER.unauth()
             NSUserDefaults.standardUserDefaults().setValue(nil, forKey: KEY_UID)
+            
         }
         
     }
