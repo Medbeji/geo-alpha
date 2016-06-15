@@ -7,21 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		472CEE12F4F2E6F92F0D4932 /* Pods_GeoAlpha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7468446CCEE4FE3EBD55E172 /* Pods_GeoAlpha.framework */; };
+		500085831D0D0D37002D0BC2 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500085821D0D0D37002D0BC2 /* Client.swift */; };
+		500085861D0D156D002D0BC2 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500085851D0D156D002D0BC2 /* Location.swift */; };
+		5069EBBC1D0EDF7C005D0A2A /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5069EBBA1D0EDF7C005D0A2A /* NotoSans-Bold.ttf */; };
+		5069EBBD1D0EDF7C005D0A2A /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5069EBBB1D0EDF7C005D0A2A /* NotoSans-Regular.ttf */; };
+		5069EBC01D0EF3D4005D0A2A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5069EBBF1D0EF3D4005D0A2A /* LoginView.swift */; };
+		5069EBC31D0EF409005D0A2A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5069EBC21D0EF409005D0A2A /* Constants.swift */; };
+		509A1D3D1D0AFA8B000C10D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A1D3C1D0AFA8B000C10D6 /* LoginViewController.swift */; };
+		509A1D3F1D0AFB18000C10D6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A1D3E1D0AFB18000C10D6 /* DataService.swift */; };
+		509C44671D0CFA5500578E63 /* UserTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C44661D0CFA5500578E63 /* UserTableVC.swift */; };
 		50BB00681D0ADD1B00945891 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BB00671D0ADD1B00945891 /* AppDelegate.swift */; };
-		50BB006A1D0ADD1B00945891 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BB00691D0ADD1B00945891 /* ViewController.swift */; };
 		50BB006D1D0ADD1B00945891 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50BB006B1D0ADD1B00945891 /* Main.storyboard */; };
 		50BB006F1D0ADD1B00945891 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50BB006E1D0ADD1B00945891 /* Assets.xcassets */; };
 		50BB00721D0ADD1B00945891 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50BB00701D0ADD1B00945891 /* LaunchScreen.storyboard */; };
+		50DB61DA1D0D4D0F003A0727 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB61D91D0D4D0F003A0727 /* LocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		500085821D0D0D37002D0BC2 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		500085851D0D156D002D0BC2 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		506127473680FB63F44B0BDD /* Pods-GeoAlpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoAlpha.release.xcconfig"; path = "Pods/Target Support Files/Pods-GeoAlpha/Pods-GeoAlpha.release.xcconfig"; sourceTree = "<group>"; };
+		5069EBBA1D0EDF7C005D0A2A /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		5069EBBB1D0EDF7C005D0A2A /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		5069EBBF1D0EF3D4005D0A2A /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		5069EBC21D0EF409005D0A2A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		509A1D3C1D0AFA8B000C10D6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		509A1D3E1D0AFB18000C10D6 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		509C44661D0CFA5500578E63 /* UserTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableVC.swift; sourceTree = "<group>"; };
 		50BB00641D0ADD1B00945891 /* GeoAlpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoAlpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50BB00671D0ADD1B00945891 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		50BB00691D0ADD1B00945891 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		50BB006C1D0ADD1B00945891 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50BB006E1D0ADD1B00945891 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50BB00711D0ADD1B00945891 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50BB00731D0ADD1B00945891 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50DB61D91D0D4D0F003A0727 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		7468446CCEE4FE3EBD55E172 /* Pods_GeoAlpha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GeoAlpha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E86B64C87A9730281156EED0 /* Pods-GeoAlpha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoAlpha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GeoAlpha/Pods-GeoAlpha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +51,72 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				472CEE12F4F2E6F92F0D4932 /* Pods_GeoAlpha.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500085801D0D0D16002D0BC2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				500085821D0D0D37002D0BC2 /* Client.swift */,
+				500085851D0D156D002D0BC2 /* Location.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		500085811D0D0D1D002D0BC2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				509C44661D0CFA5500578E63 /* UserTableVC.swift */,
+				509A1D3C1D0AFA8B000C10D6 /* LoginViewController.swift */,
+				50DB61D91D0D4D0F003A0727 /* LocationViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		500085841D0D0EA7002D0BC2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				509A1D3E1D0AFB18000C10D6 /* DataService.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		5069EBB91D0EDF70005D0A2A /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				5069EBBA1D0EDF7C005D0A2A /* NotoSans-Bold.ttf */,
+				5069EBBB1D0EDF7C005D0A2A /* NotoSans-Regular.ttf */,
+			);
+			name = Ressources;
+			sourceTree = "<group>";
+		};
+		5069EBBE1D0EF3AC005D0A2A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5069EBBF1D0EF3D4005D0A2A /* LoginView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5069EBC11D0EF3FA005D0A2A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5069EBC21D0EF409005D0A2A /* Constants.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		50BB005B1D0ADD1B00945891 = {
 			isa = PBXGroup;
 			children = (
 				50BB00661D0ADD1B00945891 /* GeoAlpha */,
 				50BB00651D0ADD1B00945891 /* Products */,
+				AB99E47F2C7B1D3C0421FE09 /* Pods */,
+				6507DEA5C3B4481C12656CF3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +131,36 @@
 		50BB00661D0ADD1B00945891 /* GeoAlpha */ = {
 			isa = PBXGroup;
 			children = (
+				5069EBC11D0EF3FA005D0A2A /* Util */,
+				5069EBBE1D0EF3AC005D0A2A /* View */,
+				5069EBB91D0EDF70005D0A2A /* Ressources */,
 				50BB00671D0ADD1B00945891 /* AppDelegate.swift */,
-				50BB00691D0ADD1B00945891 /* ViewController.swift */,
+				500085841D0D0EA7002D0BC2 /* Service */,
+				500085811D0D0D1D002D0BC2 /* Controller */,
+				500085801D0D0D16002D0BC2 /* Model */,
 				50BB006B1D0ADD1B00945891 /* Main.storyboard */,
 				50BB006E1D0ADD1B00945891 /* Assets.xcassets */,
 				50BB00701D0ADD1B00945891 /* LaunchScreen.storyboard */,
 				50BB00731D0ADD1B00945891 /* Info.plist */,
 			);
 			path = GeoAlpha;
+			sourceTree = "<group>";
+		};
+		6507DEA5C3B4481C12656CF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7468446CCEE4FE3EBD55E172 /* Pods_GeoAlpha.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB99E47F2C7B1D3C0421FE09 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E86B64C87A9730281156EED0 /* Pods-GeoAlpha.debug.xcconfig */,
+				506127473680FB63F44B0BDD /* Pods-GeoAlpha.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +170,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50BB00761D0ADD1B00945891 /* Build configuration list for PBXNativeTarget "GeoAlpha" */;
 			buildPhases = (
+				3658319B60FF9289E8587CC6 /* [CP] Check Pods Manifest.lock */,
 				50BB00601D0ADD1B00945891 /* Sources */,
 				50BB00611D0ADD1B00945891 /* Frameworks */,
 				50BB00621D0ADD1B00945891 /* Resources */,
+				F3B9F454570BCCEB88237B79 /* [CP] Embed Pods Frameworks */,
+				4A4316F76E72FC129BB47BE8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -96,6 +198,7 @@
 				TargetAttributes = {
 					50BB00631D0ADD1B00945891 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 57GNWW8LD2;
 					};
 				};
 			};
@@ -122,7 +225,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5069EBBC1D0EDF7C005D0A2A /* NotoSans-Bold.ttf in Resources */,
 				50BB00721D0ADD1B00945891 /* LaunchScreen.storyboard in Resources */,
+				5069EBBD1D0EDF7C005D0A2A /* NotoSans-Regular.ttf in Resources */,
 				50BB006F1D0ADD1B00945891 /* Assets.xcassets in Resources */,
 				50BB006D1D0ADD1B00945891 /* Main.storyboard in Resources */,
 			);
@@ -130,13 +235,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3658319B60FF9289E8587CC6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4A4316F76E72FC129BB47BE8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GeoAlpha/Pods-GeoAlpha-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3B9F454570BCCEB88237B79 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GeoAlpha/Pods-GeoAlpha-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		50BB00601D0ADD1B00945891 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50BB006A1D0ADD1B00945891 /* ViewController.swift in Sources */,
+				509A1D3D1D0AFA8B000C10D6 /* LoginViewController.swift in Sources */,
+				500085831D0D0D37002D0BC2 /* Client.swift in Sources */,
+				5069EBC01D0EF3D4005D0A2A /* LoginView.swift in Sources */,
+				509C44671D0CFA5500578E63 /* UserTableVC.swift in Sources */,
+				5069EBC31D0EF409005D0A2A /* Constants.swift in Sources */,
 				50BB00681D0ADD1B00945891 /* AppDelegate.swift in Sources */,
+				509A1D3F1D0AFB18000C10D6 /* DataService.swift in Sources */,
+				500085861D0D156D002D0BC2 /* Location.swift in Sources */,
+				50DB61DA1D0D4D0F003A0727 /* LocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,23 +409,33 @@
 		};
 		50BB00771D0ADD1B00945891 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E86B64C87A9730281156EED0 /* Pods-GeoAlpha.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = GeoAlpha/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alphalab.GeoAlpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		50BB00781D0ADD1B00945891 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 506127473680FB63F44B0BDD /* Pods-GeoAlpha.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = GeoAlpha/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alphalab.GeoAlpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -288,6 +458,7 @@
 				50BB00781D0ADD1B00945891 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
