@@ -15,8 +15,8 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
     @IBOutlet weak var emailTField: UITextField!
     @IBOutlet weak var passwordTField: UITextField!
     var locationManager: CLLocationManager!
-    var longitude: Double = 0
-    var latitude: Double = 0
+    var longitude: Double = 10.499876
+    var latitude: Double = 36.597084
     
     
     override func viewDidLoad() {
@@ -37,7 +37,7 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
         super.viewDidDisappear(animated)
         
         //        let location : Dictionary<String,AnyObject>=["latitude":self.latitude,"longitude":self.longitude]
-        //        print(location)
+        //        //print(location)
         //        DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER.authData.uid).childByAppendingPath("location").setValue(location)
         
         if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil && DataService.ds.CURRENT_USER.authData != nil {
@@ -52,9 +52,6 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
     
     
     @IBAction func login(sender: AnyObject) {
-        
-        // CURRENT LOCATION !
-        
         if  let email = self.emailTField.text where email != "" , let pwd = self.passwordTField.text where pwd != "" {
             firebaseLoginOrSignUp(email,pwd: pwd)
         } else {
@@ -79,7 +76,6 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
         let userLocation:CLLocation = locations[0] 
         self.longitude = userLocation.coordinate.longitude
         self.latitude = userLocation.coordinate.latitude
-        //Do What ever you want with it
     }
     
     
@@ -88,7 +84,7 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
         DataService.ds.REF_BASE.authUser(email, password: pwd, withCompletionBlock: {
             error,authData in
             if error != nil {
-                print(error.code)
+                
                 if  error.code == STATUS_ACCOUNT_NONEXITS {
                     // SignUP
                     
@@ -111,7 +107,6 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
             } else {
                 // Login
                 let location : Dictionary<String,AnyObject>=["latitude":self.latitude,"longitude":self.longitude]
-                print(location)
                 DataService.ds.REF_USERS.childByAppendingPath(authData.uid).childByAppendingPath("location").setValue(location)
                 NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
@@ -121,6 +116,15 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
         
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SEGUE_LOGGED_IN {
+            if let destination  = segue.destinationViewController as? UserTableVC {
+                destination.latitude = self.latitude
+                destination.longitude = self.longitude
+            }
+        }
+    }
     
     func showErrerAlert(title : String,msg:String){
         let alert = UIAlertController(title:title,message:msg,preferredStyle: .Alert)

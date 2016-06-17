@@ -10,22 +10,27 @@ import UIKit
 import Firebase
 import MapKit
 
-class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapViewDelegate  {
+class UserTableVC: UITableViewController  ,MKMapViewDelegate  {
+    
     var locationManager: CLLocationManager!
     var users = [Client]()
     var authenDict = Dictionary<String,Bool>()
     var isAuthorized = false
     var usersConnectedWith = [String]()
     
+    var latitude: CLLocationDegrees = 0
+    var longitude: CLLocationDegrees = 0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         tableView.delegate = self
         tableView.dataSource = self
         self.showUsers()
         usersConnectedWith = []
-        // Listening for demands !!
         self.listeningForDemands()
-        
         self.locationSetting()
         
     }
@@ -44,15 +49,6 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
     }
     
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation:CLLocation = locations[0]
-        if (DataService.ds.CURRENT_USER_ID != ""){
-            
-            DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/longitude").setValue(userLocation.coordinate.longitude)
-            DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/latitude").setValue(userLocation.coordinate.latitude)
-        }
-        
-    }
     
     
     
@@ -77,8 +73,6 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
                         if ( self.authenDict[user.userID] == nil) {
                             self.authenDict[user.userID] = false
                         }
-                        
-                        //Listening for responses!!
                         self.listeningForDemandsResponse(user.userID)
                         
                     }
@@ -96,7 +90,6 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
                 let userDict = snapshot.value as? Dictionary<String,AnyObject>
                 let userIDSource = Array(userDict!.keys)[0] as String
                 // We can  get information about the user from Firebase here ...
-                print("userIDSource = ", userIDSource)
                 var showAlert = true
                 
                 for user in self.usersConnectedWith {
@@ -149,15 +142,11 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
             
             let acceptAction = UIAlertAction(title: "Accept", style: .Default, handler: {
                 (alert:UIAlertAction) in
-                print("Action Accepted!")
-                
                 DataService.ds.REF_CONNECTIONS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath(usrIDSrc).childByAppendingPath("accept").setValue("true")
                 
             })
             let denyAction = UIAlertAction(title: "Deny", style: .Default, handler: {
                 (alert:UIAlertAction) in
-                print("Action denied!")
-                
                 DataService.ds.REF_CONNECTIONS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath(usrIDSrc).childByAppendingPath("accept").setValue("false")
             })
             alert.addAction(acceptAction)
@@ -171,22 +160,13 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
     
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        
         
         return  1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
         
         return users.count
     }
@@ -197,9 +177,6 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath)
-        
-        // Configure the cell...
-        
         let user = users[indexPath.row]
         cell.textLabel?.text = user.username
         
@@ -211,14 +188,10 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == SEGUE_SHOW_DETAILS {
-            
-            
-            // Sucess , permission granted
             if let destination  = segue.destinationViewController as? LocationViewController {
                 destination.userTarget = users[(tableView.indexPathForSelectedRow!.row)]
-                print("Our Target Name is = \(destination.userTarget.username)")
-                print("Location = \(destination.userTarget.location.latitude) |  \(destination.userTarget.location.longitude)")
-                print("UserID = \(destination.userTarget.userID)")
+                destination.latitude = self.latitude
+                destination.longitude = self.longitude
             }
             
         }
@@ -227,7 +200,7 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
             navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: false)
             DataService.ds.CURRENT_USER.unauth()
             NSUserDefaults.standardUserDefaults().setValue(nil, forKey: KEY_UID)
-            
+            DataService.ds.REF_BASE.removeAllObservers()
         }
         
     }
@@ -243,7 +216,7 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
             isAuthorized = authenDict[userID]!
             
             
-            // Date for today 
+            // Today's date
             
             let todaysDate:NSDate = NSDate()
             let dateFormatter:NSDateFormatter = NSDateFormatter()
@@ -251,16 +224,14 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
             let DateInFormat:String = dateFormatter.stringFromDate(todaysDate)
             
             // Set the request in Firebase connections node.
-            let receiver: Dictionary<String,AnyObject> = ["\(DataService.ds.CURRENT_USER_ID)":["date": DateInFormat,"accept":"false"]]
-            DataService.ds.REF_CONNECTIONS.childByAppendingPath(userTarget.userID).setValue(receiver)
+            let receiver: Dictionary<String,AnyObject> = ["date": DateInFormat,"accept":"false"]
+            DataService.ds.REF_CONNECTIONS.childByAppendingPath(userTarget.userID).childByAppendingPath(DataService.ds.CURRENT_USER_ID).setValue(receiver)
             
             if !isAuthorized {
                 
                 let alertController = UIAlertController(title: "Wait for destination response..", message: "You cannot perform this segue because access is not granted yet!", preferredStyle: .Alert)
-                
                 let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alertController.addAction(defaultAction)
-                
                 presentViewController(alertController, animated: true, completion: nil)
                 
                 return false
@@ -270,5 +241,23 @@ class UserTableVC: UITableViewController  ,CLLocationManagerDelegate , MKMapView
         return true
     }
     
+    
+}
+
+
+extension UserTableVC: CLLocationManagerDelegate  {
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0]
+        if (DataService.ds.CURRENT_USER_ID != ""){
+            
+            DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/longitude").setValue(userLocation.coordinate.longitude)
+            DataService.ds.REF_USERS.childByAppendingPath(DataService.ds.CURRENT_USER_ID).childByAppendingPath("location/latitude").setValue(userLocation.coordinate.latitude)
+            latitude = userLocation.coordinate.latitude
+            longitude = userLocation.coordinate.longitude
+            
+        }
+        
+    }
     
 }

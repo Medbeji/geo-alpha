@@ -10,6 +10,7 @@
 		472CEE12F4F2E6F92F0D4932 /* Pods_GeoAlpha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7468446CCEE4FE3EBD55E172 /* Pods_GeoAlpha.framework */; };
 		500085831D0D0D37002D0BC2 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500085821D0D0D37002D0BC2 /* Client.swift */; };
 		500085861D0D156D002D0BC2 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500085851D0D156D002D0BC2 /* Location.swift */; };
+		502206541D1415BB00DED3E3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 502206531D1415BB00DED3E3 /* MapKit.framework */; };
 		5069EBBC1D0EDF7C005D0A2A /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5069EBBA1D0EDF7C005D0A2A /* NotoSans-Bold.ttf */; };
 		5069EBBD1D0EDF7C005D0A2A /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5069EBBB1D0EDF7C005D0A2A /* NotoSans-Regular.ttf */; };
 		5069EBC01D0EF3D4005D0A2A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5069EBBF1D0EF3D4005D0A2A /* LoginView.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		500085821D0D0D37002D0BC2 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		500085851D0D156D002D0BC2 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		502206531D1415BB00DED3E3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		506127473680FB63F44B0BDD /* Pods-GeoAlpha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoAlpha.release.xcconfig"; path = "Pods/Target Support Files/Pods-GeoAlpha/Pods-GeoAlpha.release.xcconfig"; sourceTree = "<group>"; };
 		5069EBBA1D0EDF7C005D0A2A /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
 		5069EBBB1D0EDF7C005D0A2A /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				502206541D1415BB00DED3E3 /* MapKit.framework in Frameworks */,
 				472CEE12F4F2E6F92F0D4932 /* Pods_GeoAlpha.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +152,7 @@
 		6507DEA5C3B4481C12656CF3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				502206531D1415BB00DED3E3 /* MapKit.framework */,
 				7468446CCEE4FE3EBD55E172 /* Pods_GeoAlpha.framework */,
 			);
 			name = Frameworks;
@@ -199,6 +203,11 @@
 					50BB00631D0ADD1B00945891 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 57GNWW8LD2;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
