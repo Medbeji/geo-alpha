@@ -44,9 +44,6 @@
             return ""
         }
         
-        
-        
-        
         func createFirebaseUser(uid: String,user:Dictionary<String,String>){
             
         }

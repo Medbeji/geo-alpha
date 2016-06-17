@@ -69,14 +69,11 @@ class LocationViewController: UIViewController {
         
         let region = MKCoordinateRegion(center: requestLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         self.map.setRegion(region, animated: true)
-        let objectAnnotation1 = MKPointAnnotation()
-        objectAnnotation1.coordinate = CLLocationCoordinate2DMake(self.latitude,self.longitude)
-        objectAnnotation1.title = "My Location"
         
         let objectAnnotation = MKPointAnnotation()
         objectAnnotation.coordinate = requestLocation
         objectAnnotation.title = userTarget.username
-        self.map.addAnnotation(objectAnnotation1)
+        
         self.map.addAnnotation(objectAnnotation)
         
     }
@@ -109,6 +106,7 @@ class LocationViewController: UIViewController {
                                                     self.locationArray[1].mapItem = MKMapItem(placemark:
                                                         MKPlacemark(coordinate: placemark.location!.coordinate,
                                                             addressDictionary: placemark.addressDictionary as! [String:AnyObject]?))
+                                                    print("Target all adresses Dictionary = \(placemark.addressDictionary)")
                                                     print("destination location = \(self.formatAddressFromPlacemark(placemark))")
                                                 }
         })
@@ -267,6 +265,7 @@ extension LocationViewController: CLLocationManagerDelegate {
                                                     self.locationArray[0].mapItem = MKMapItem(placemark:
                                                         MKPlacemark(coordinate: placemark.location!.coordinate,
                                                             addressDictionary: placemark.addressDictionary as! [String:AnyObject]?))
+                                                    print("Source all adresses Dictionary = \(placemark.addressDictionary)")
                                                     print(self.formatAddressFromPlacemark(placemark))
                                                 }
         })
@@ -280,6 +279,11 @@ extension LocationViewController: CLLocationManagerDelegate {
         let distanceDouble = Double(distance/1000)
         let roundedDistance = Double(round(distanceDouble * 10) / 10)
         distanceLabel.text = "\(roundedDistance) Km"
+        
+        let objectAnnotation1 = MKPointAnnotation()
+        objectAnnotation1.coordinate = CLLocationCoordinate2DMake(self.latitude,self.longitude)
+        objectAnnotation1.title = "My Location"
+        self.map.addAnnotation(objectAnnotation1)
         
     }
     

@@ -15,9 +15,9 @@ class LoginViewController: UIViewController ,CLLocationManagerDelegate , MKMapVi
     @IBOutlet weak var emailTField: UITextField!
     @IBOutlet weak var passwordTField: UITextField!
     var locationManager: CLLocationManager!
-    var longitude: Double = 10.499876
-    var latitude: Double = 36.597084
-    
+    var longitude: Double = 0
+    var latitude: Double = 0
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()

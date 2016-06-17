@@ -17,7 +17,7 @@ class UserTableVC: UITableViewController  ,MKMapViewDelegate  {
     var authenDict = Dictionary<String,Bool>()
     var isAuthorized = false
     var usersConnectedWith = [String]()
-    
+    var myConnectionsHistory: [String] = []
     var latitude: CLLocationDegrees = 0
     var longitude: CLLocationDegrees = 0
     
@@ -47,10 +47,6 @@ class UserTableVC: UITableViewController  ,MKMapViewDelegate  {
             locationManager.startUpdatingLocation()
         }
     }
-    
-    
-    
-    
     
     
     func showUsers(){
@@ -201,6 +197,9 @@ class UserTableVC: UITableViewController  ,MKMapViewDelegate  {
             DataService.ds.CURRENT_USER.unauth()
             NSUserDefaults.standardUserDefaults().setValue(nil, forKey: KEY_UID)
             DataService.ds.REF_BASE.removeAllObservers()
+            for  connectionID in myConnectionsHistory {
+                DataService.ds.REF_CONNECTIONS.childByAppendingPath(connectionID).removeValue()
+            }
         }
         
     }
@@ -226,7 +225,7 @@ class UserTableVC: UITableViewController  ,MKMapViewDelegate  {
             // Set the request in Firebase connections node.
             let receiver: Dictionary<String,AnyObject> = ["date": DateInFormat,"accept":"false"]
             DataService.ds.REF_CONNECTIONS.childByAppendingPath(userTarget.userID).childByAppendingPath(DataService.ds.CURRENT_USER_ID).setValue(receiver)
-            
+            myConnectionsHistory.append("\(userTarget.userID)/\(DataService.ds.CURRENT_USER_ID)")
             if !isAuthorized {
                 
                 let alertController = UIAlertController(title: "Wait for destination response..", message: "You cannot perform this segue because access is not granted yet!", preferredStyle: .Alert)
